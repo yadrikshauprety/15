@@ -30,6 +30,13 @@ const UserDashboard = () => {
   const { isAuthenticated, user } = useAuth();
   const [activeTab, setActiveTab] = useState('case');
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [showCheckIn, setShowCheckIn] = useState(true);
+  const [sentiment, setSentiment] = useState<SentimentResponse | null>(null);
+
+  const handleCheckInComplete = (responses: SentimentResponse) => {
+    setSentiment(responses);
+    setShowCheckIn(false);
+  };
 
   if (!isAuthenticated || user?.role !== 'user') return <Navigate to="/auth" />;
 
